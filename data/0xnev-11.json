@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "0xnev",
+  "risk": "2",
+  "title": "[M-02] Any policy holders with same permissions can queue actions for other policy holders",
+  "issueId": 11,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/11"
+}
