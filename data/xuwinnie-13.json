@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "xuwinnie",
+  "risk": "3",
+  "title": "Malicious user can prevent the execution of any approved action targeting \"setRoleHolder\" or \"revokePolicy\" by frontrunning \"createAction\"",
+  "issueId": 13,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/13"
+}
