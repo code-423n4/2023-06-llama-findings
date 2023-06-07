@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "xuwinnie",
+  "risk": "3",
+  "title": "Expired role holder with creation permission can avoid being revocated by frontrunning \"createAction\"",
+  "issueId": 12,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/12"
+}
