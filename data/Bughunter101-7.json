@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Bughunter101",
+  "risk": "3",
+  "title": "`LlamaPolicy.finalizeInitialization()` does not check auth",
+  "issueId": 7,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/7"
+}
