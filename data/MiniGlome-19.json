@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "MiniGlome",
+  "risk": "3",
+  "title": "Actions with value != 0 will always fail",
+  "issueId": 19,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/19"
+}
