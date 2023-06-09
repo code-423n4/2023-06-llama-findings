@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "T1MOH",
+  "risk": "2",
+  "title": "User is unable to cast approval/disapproval via forceApprovalRole if he has previously casted approval/disapproval via approvalRole",
+  "issueId": 25,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/25"
+}
