@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "0xnev",
+  "risk": "3",
+  "title": "[H-01] Guards can be bypassed by manipulating data input",
+  "issueId": 27,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/27"
+}
