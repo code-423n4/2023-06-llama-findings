@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "jefestar",
+  "risk": "3",
+  "title": "[H]-01 Missing reentrancy protection",
+  "issueId": 40,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/40"
+}
