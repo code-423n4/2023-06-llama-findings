@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "ravikiranweb3",
+  "risk": "2",
+  "title": "Governance script's aggregate function's logic to identify unauthorised target looks faulty",
+  "issueId": 29,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/29"
+}
