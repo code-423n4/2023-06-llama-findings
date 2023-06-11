@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "ktg",
+  "risk": "2",
+  "title": "Action states mismatch between LlamaCore and LlamaStrategy when isFixedLengthApprovalPeriod = true",
+  "issueId": 51,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/51"
+}
