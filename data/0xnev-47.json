@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "0xnev",
+  "risk": "3",
+  "title": "[H-02] Wrong votes quantity comparison for action approval and disapprovals in `LlamaRelativeQuorum` strategy ",
+  "issueId": 47,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/47"
+}
