@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "0xnev",
+  "risk": "2",
+  "title": "[M-04] Use `safeTransferFrom()` instead of `transferFrom()` for ERC721 tokens in `LLamaAccount.sol`",
+  "issueId": 60,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/60"
+}
