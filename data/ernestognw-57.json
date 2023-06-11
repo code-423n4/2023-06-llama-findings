@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "ernestognw",
+  "risk": "2",
+  "title": "Actions with `value != 0` will not get executed due to incorrect value forwarding",
+  "issueId": 57,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/57"
+}
