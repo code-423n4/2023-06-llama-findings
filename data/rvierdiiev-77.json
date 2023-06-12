@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "rvierdiiev",
+  "risk": "2",
+  "title": "`executeAction` function doesn't check if script is authorized",
+  "issueId": 77,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/77"
+}
