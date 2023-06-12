@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "ktg",
+  "risk": "3",
+  "title": "Anyone can change approval/disapproval threshold for any action using LlamaRelativeQuorum strategy. ",
+  "issueId": 62,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/62"
+}
