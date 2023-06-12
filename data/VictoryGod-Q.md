@@ -9,10 +9,8 @@
 |05|Check strategy and account authorization| LlamaFactory.sol |
 |06|Use IERC721Metadata for URIs| LlamaFactory.sol |
 |07|Validate input parameters in initialize| LlamaCore.sol |
-|08|Require statement for array lengths in transmit| LlamaCore.sol |
-|09|Input validation for reportContext array| LlamaCore.sol |
 
-Total 9 issues
+Total 7 issues
 
 ## File -> LlamaPolicyMetadataParamRegistry.sol
 ### [01] There is a potential security vulnerability in the setColor and setLogo functions. 
@@ -56,19 +54,4 @@ such as checking for non-zero addresses for _policy, _llamaStrategyLogic, and _l
    require(address(_policy) != address(0), "Invalid policy address");
    require(address(_llamaStrategyLogic) != address(0), "Invalid strategy logic address");
    require(address(_llamaAccountLogic) != address(0), "Invalid account logic address");
-```
-
-### [08] Consider adding a require statement to check the lengths of `rs` and `ss` arrays in the transmit() function.
-
-This can help ensure that the input data is consistent and prevent potential logical issues.
-
-https://github.com/code-423n4/2023-05-chainlink/blob/f7a6de4a5292478dbf5b0750a931f8fd957916e8/contracts/ocr/OCR2BaseNoChecks.sol#L156
-```
-require(rs.length == ss.length, "rs and ss arrays must have the same length");
-```
-
-### [09] Add input validation for the `reportContext` array to ensure it has the correct length.
-https://github.com/code-423n4/2023-05-chainlink/blob/f7a6de4a5292478dbf5b0750a931f8fd957916e8/contracts/ocr/OCR2BaseNoChecks.sol#L159
-```
-require(reportContext.length == 3, "reportContext must have a length of 3");
 ```
