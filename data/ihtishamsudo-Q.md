@@ -6,6 +6,11 @@ Constructors should check the address written in an immutable address variable i
 [LlamaExecutor.sol#L12](https://github.com/code-423n4/2023-06-llama/blob/9d641b32e3f4092cc81dbac7b1c451c695e78983/src/LlamaExecutor.sol#L12)
 [LlamaExecutor.sol#L16](https://github.com/code-423n4/2023-06-llama/blob/9d641b32e3f4092cc81dbac7b1c451c695e78983/src/LlamaExecutor.sol#L16)
 [LlamaPolicyMetadataParamRegistry.sol#l43](https://github.com/code-423n4/2023-06-llama/blob/9d641b32e3f4092cc81dbac7b1c451c695e78983/src/LlamaPolicyMetadataParamRegistry.sol#L44-L45)
+
+##### Tools Used
+
+Solodit
+
 ##### Mitigation Step
 Add a zero address check for `LLAMA_CORE`
 
@@ -14,6 +19,10 @@ Add a zero address check for `LLAMA_CORE`
 In the function `execute` passing all arguments along with a null address does not throw any null address check error. Failing to do so may lead to unexpected behavior in the contract.
 
 ##### Reference [LlamaExecutor.sol#L29]
+
+##### Tools Used
+
+Remix
 
 ##### Mitigation Step
 
