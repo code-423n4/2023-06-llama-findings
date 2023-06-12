@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "mrpathfindr",
+  "risk": "2",
+  "title": "Integer Overflow newCastCount leads to inaccurate results",
+  "issueId": 87,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/87"
+}
