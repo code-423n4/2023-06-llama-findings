@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "djxploit",
+  "risk": "2",
+  "title": "DOS due to front-running of `createStrategies` and `createAccounts` functions",
+  "issueId": 92,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/92"
+}
