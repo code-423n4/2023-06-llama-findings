@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "ktg",
+  "risk": "2",
+  "title": "LlamaPolicy could be DOSed by creating large amount of actions.",
+  "issueId": 64,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/64"
+}
