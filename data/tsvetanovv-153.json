@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "tsvetanovv",
+  "risk": "2",
+  "title": "Not checked return value in `execute()`",
+  "issueId": 153,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/153"
+}
