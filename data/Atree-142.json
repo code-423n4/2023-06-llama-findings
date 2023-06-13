@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Atree",
+  "risk": "3",
+  "title": "Malicious user can frontrun \"createAction\" to make \"revokeExpiredRole\" revert",
+  "issueId": 142,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/142"
+}
