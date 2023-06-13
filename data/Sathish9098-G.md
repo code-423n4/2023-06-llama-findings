@@ -1,13 +1,33 @@
-[G-] Using calldata instead of memory for read-only arguments in external functions saves gas
+# GAS OPTIMIZATIONS
 
+##
+
+## [G-] Using storage instead of memory for structs/arrays saves gas
+
+When fetching data from a storage location, assigning the data to a ``memory`` variable causes all fields of the struct/array to be read from storage, which incurs a Gcoldsload (2100 gas) for each field of the struct/array. If the fields are read from the new memory variable, they incur an additional ``MLOAD`` rather than a cheap stack read. Instead of declaring the variable with the memory keyword, declaring the variable with the storage keyword and caching any fields that need to be re-read in stack variables, will be much cheaper, only incuring the Gcoldsload for the fields actually read. The only time it makes sense to read the whole struct/array into a memory variable, is if the full struct/array is being returned by the function, is being passed to a function that requires memory, or if the array/struct is being read from another memory array/struct
+
+https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/lib/Checkpoints.sol#L106
+
+### _unsafeAccess function returns the ``storage Checkpoint `` . Then the implicit conversion storage to memory costs ``Gcoldsload `` extra ``2100 gas `` . ``ckpt, last `` only reading the values no write operations. So using ``storage`` is more efficient than ``memory``. Saves ``8400 GAS`` approximately 
+
+Checkpoint struct in storage, using _unsafeAccess directly can be more gas-efficient than assigning it to a local variable. This is because accessing the struct in storage via _unsafeAccess involves reading from storage once, whereas assigning it to a local variable creates a copy of the struct in memory, which incurs additional gas costs. 
+
+```diff
+FILE: 2023-06-llama/src/lib/Checkpoints.sol
+
+- 106: Checkpoint memory ckpt = _unsafeAccess(self._checkpoints, pos - 1);
++ 106: Checkpoint storage ckpt = _unsafeAccess(self._checkpoints, pos - 1);
+107: return (true, ckpt.timestamp, ckpt.expiration, ckpt.quantity);
+
+- 132: Checkpoint memory last = _unsafeAccess(self, pos - 1);
++ 132: Checkpoint storage last = _unsafeAccess(self, pos - 1);
+
+
+```
 [G-] The result of function calls should be cached rather than re-calling the function 3
 L
 
-[G-] State variables only set in the constructor should be declared immutable
-
 [G-] State variables can be packed into fewer storage slots
-
-[G-] Using storage instead of memory for structs/arrays saves gas
 
 [G-] Multiple accesses of a mapping/array should use a local variable cache
 
