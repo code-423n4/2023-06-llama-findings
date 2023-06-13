@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Go-Langer",
+  "risk": "2",
+  "title": "[ M ] Use safeTransferFrom instead of transferFrom",
+  "issueId": 181,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/181"
+}
