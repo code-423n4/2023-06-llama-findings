@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Atree",
+  "risk": "3",
+  "title": "Attacker can revert execution by frontrunning \"createAction\"",
+  "issueId": 141,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/141"
+}
