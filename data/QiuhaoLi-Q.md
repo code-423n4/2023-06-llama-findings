@@ -40,20 +40,6 @@ So when policyholders want to deploy an account with the same config, or there e
 
 Adding random salt can solve this problem.
 
-## [low] Factory can't deploy two instances with the same name
-
-https://github.com/code-423n4/2023-06-llama/blob/main/src/LlamaFactory.sol#L250
-
-```solidity
-    LlamaPolicy policy =
-      LlamaPolicy(Clones.cloneDeterministic(address(LLAMA_POLICY_LOGIC), keccak256(abi.encodePacked(name))));
-    policy.initialize(name, initialRoleDescriptions, initialRoleHolders, initialRolePermissions);
-```
-
-As we can see, the factory uses the name as salt. So if a user wants to deploy an instance with the same name as an existing one, the action will fail (create2 on the same address).
-
-Adding random salt can solve this problem.
-
 ## [non-critical] _getDomainHash use semantic version
 
 https://github.com/code-423n4/2023-06-llama/blob/main/src/LlamaCore.sol#L708
