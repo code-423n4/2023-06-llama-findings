@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "ayden",
+  "risk": "2",
+  "title": "`tokenURI` function should not return meta information for a non-existent NFT ID",
+  "issueId": 164,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/164"
+}
