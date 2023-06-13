@@ -1,4 +1,21 @@
+[G-] Using calldata instead of memory for read-only arguments in external functions saves gas
 
+[G-] The result of function calls should be cached rather than re-calling the function 3
+L
+
+[G-] State variables only set in the constructor should be declared immutable
+
+[G-] State variables can be packed into fewer storage slots
+
+[G-] Using storage instead of memory for structs/arrays saves gas
+
+[G-] Multiple accesses of a mapping/array should use a local variable cache
+
+[G-] Using bools for storage incurs overhead
+
+[G-] Save gas by checking against default WETH address
+
+[G-] Avoid emitting constants
 
 
 
