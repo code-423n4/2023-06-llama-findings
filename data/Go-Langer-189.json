@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Go-Langer",
+  "risk": "3",
+  "title": "[ H ] ETH not forwarded from executeAction when delegatecall takes place in function executeAction",
+  "issueId": 189,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/189"
+}
