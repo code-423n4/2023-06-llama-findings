@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Co0nan",
+  "risk": "2",
+  "title": "Predictability of pool address on LlamaFactory.deploy will creates multiple issues",
+  "issueId": 196,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/196"
+}
