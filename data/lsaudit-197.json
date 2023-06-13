@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "lsaudit",
+  "risk": "2",
+  "title": "Batching approve for ERC-721 won't approve every token in batch, if it receives the same recipent.",
+  "issueId": 197,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/197"
+}
