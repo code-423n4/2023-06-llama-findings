@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "qpzm",
+  "risk": "3",
+  "title": "`LlamaAccount.llamaExecutor` may be changed for a malicious purpose and be return to the initial state.",
+  "issueId": 237,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/237"
+}
