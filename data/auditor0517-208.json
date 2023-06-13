@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "auditor0517",
+  "risk": "2",
+  "title": "In `LlamaCore`, the approval/disapproval logic by sig wouldn't work properly when the policyholder adds two or more off-chain signatures using one nonce.",
+  "issueId": 208,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/208"
+}
