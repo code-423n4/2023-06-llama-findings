@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "MohammedRizwan",
+  "risk": "3",
+  "title": "llamaExecutor address can be set by anyone, giving further privilege to onlyLlama accessed functions(Sponsor confirmed in DM)",
+  "issueId": 229,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/229"
+}
