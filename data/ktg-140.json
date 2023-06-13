@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "ktg",
+  "risk": "2",
+  "title": "Executor is forced to create and assign disapproval role even though they choose to disable disapproval.",
+  "issueId": 140,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/140"
+}
