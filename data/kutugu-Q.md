@@ -1,9 +1,10 @@
 # Findings Summary
 
-| ID     | Title                                                | Severity |
-| ------ | ---------------------------------------------------- | -------- |
-| [L-01] | Clones.cloneDeterministic can be frontrun            | Low      |
-| [L-02] | Malicious guard can break protocol                   | Low      |
+| ID     | Title                                                               | Severity |
+| ------ | ------------------------------------------------------------------- | -------- |
+| [L-01] | Clones.cloneDeterministic can be frontrun                           | Low      |
+| [L-02] | Malicious guard can break protocol                                  | Low      |
+| [L-03] | Guard may conflict when the action target and selector are same     | Low      |
 
 # Detailed Findings
 
@@ -11,7 +12,7 @@
 
 ## Link
 
-- https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/LlamaFactory.sol#L249-L255
+- https:github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/LlamaFactory.sol#L249-L255
 
 ## Description
 
@@ -26,9 +27,9 @@ Keep initialization parameters and salt are in sync
 
 ## Link
 
-- https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/LlamaCore.sol#L330
-- https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/LlamaCore.sol#L339
-- https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/LlamaCore.sol#L550
+- https:github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/LlamaCore.sol#L330
+- https:github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/LlamaCore.sol#L339
+- https:github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/LlamaCore.sol#L550
 
 ## Description
 
@@ -38,4 +39,18 @@ In particular, for `LlamaCore.setGuard.selector`, if is a malicious guard that p
 
 ## Recommendations
 
-Consider prevent setGuard for `LlamaCore.setGuard.selector`
+Consider prevent setGuard for `LlamaCore.setGuard.selector`    
+
+# [L-03] Guard may conflict when the action target and selector are same
+
+## Link
+
+- https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/LlamaCore.sol#L444-L448
+
+## Description
+
+Guard only distinguishes between target and selector. When actions occur frequently, different actions may require different guards. When the guard is changed multiple times, conflicts may occur due to sequence problems.  
+
+## Recommendations
+
+Use data instead of selector to distinguish
