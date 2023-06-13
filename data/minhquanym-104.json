@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "minhquanym",
+  "risk": "3",
+  "title": "Role might be granted and revoked at the same block to manipulate the role supply and result in incorrect behavior of relative strategy",
+  "issueId": 104,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/104"
+}
