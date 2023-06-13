@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "BLOS",
+  "risk": "2",
+  "title": "\"_assertNoActionCreationsAtCurrentTimestamp\" can be used to DOS \"revokeExpiredRole\"",
+  "issueId": 144,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/144"
+}
