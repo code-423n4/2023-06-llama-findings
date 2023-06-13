@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Toshii",
+  "risk": "2",
+  "title": "Unsafe delegatecall functionality can break core protocol functionality",
+  "issueId": 241,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/241"
+}
