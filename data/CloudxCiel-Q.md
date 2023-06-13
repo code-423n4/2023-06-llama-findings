@@ -1,0 +1,1 @@
+Everytime the page loads/refreshes, it disconnected fr the wallet.
