@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "auditor0517",
+  "risk": "2",
+  "title": "The `forceApproval/forceDisapproval` role holders might be unable to approve/disapprove if they were approved/disapproved with the normal `approval/disapproval` role already.",
+  "issueId": 206,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/206"
+}
