@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "0xrugpull_detector",
+  "risk": "2",
+  "title": "Frontrunning of createAction by choosing different strategy according to his interest.",
+  "issueId": 138,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/138"
+}
