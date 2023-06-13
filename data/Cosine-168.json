@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Cosine",
+  "risk": "2",
+  "title": "Reverting on disapprovalPolicySupply == 0 if disapproving is disabled is unnecessary and can lead to DoS",
+  "issueId": 168,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/168"
+}
