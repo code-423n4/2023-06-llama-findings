@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Toshii",
+  "risk": "2",
+  "title": "Invalid handling of ETH in LlamaCore `executeAction` can lead to broken functionality and potential leaked value",
+  "issueId": 136,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/136"
+}
