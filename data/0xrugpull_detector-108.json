@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "0xrugpull_detector",
+  "risk": "3",
+  "title": "Should check if approval/disapproval role in force approval/disapproval role array. It might cause confusion to voters.",
+  "issueId": 108,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/108"
+}
