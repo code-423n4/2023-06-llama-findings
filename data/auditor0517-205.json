@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "auditor0517",
+  "risk": "2",
+  "title": "In `LlamaCore.sol`, there is no option to remove the strategies.",
+  "issueId": 205,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/205"
+}
