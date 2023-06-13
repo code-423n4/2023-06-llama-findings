@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "ayden",
+  "risk": "2",
+  "title": "Should check whether the role has expired while creating actions",
+  "issueId": 163,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/163"
+}
