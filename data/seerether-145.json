@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "seerether",
+  "risk": "3",
+  "title": "The executeAction function in the LlamaCore.sol calls an external contract's method without limiting the amount of gas supplied. This will lead to a loss of funds",
+  "issueId": 145,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/145"
+}
