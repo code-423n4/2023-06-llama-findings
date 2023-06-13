@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "tsvetanovv",
+  "risk": "2",
+  "title": "It is possible for `_newCastCount` to revert instead of returning a maximum value",
+  "issueId": 150,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/150"
+}
