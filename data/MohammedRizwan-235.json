@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "MohammedRizwan",
+  "risk": "2",
+  "title": "Violation of Checks-Effects-Interactions Pattern in _mint() and _burn() function",
+  "issueId": 235,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/235"
+}
