@@ -2,7 +2,9 @@
 
 ##
 
-## [G-] Using storage instead of memory for structs/arrays saves gas
+## [G-1] Using storage instead of memory for structs/arrays saves gas
+
+### Saves ``8400 GAS`` in ``2 Instances`` 
 
 When fetching data from a storage location, assigning the data to a ``memory`` variable causes all fields of the struct/array to be read from storage, which incurs a Gcoldsload (2100 gas) for each field of the struct/array. If the fields are read from the new memory variable, they incur an additional ``MLOAD`` rather than a cheap stack read. Instead of declaring the variable with the memory keyword, declaring the variable with the storage keyword and caching any fields that need to be re-read in stack variables, will be much cheaper, only incuring the Gcoldsload for the fields actually read. The only time it makes sense to read the whole struct/array into a memory variable, is if the full struct/array is being returned by the function, is being passed to a function that requires memory, or if the array/struct is being read from another memory array/struct
 
@@ -24,47 +26,80 @@ FILE: 2023-06-llama/src/lib/Checkpoints.sol
 
 
 ```
-[G-] The result of function calls should be cached rather than re-calling the function 3
-L
+##
+## [G-2] Multiple accesses of a mapping/array should use a local variable cache
 
-[G-] State variables can be packed into fewer storage slots
+### Saves ``480 GAS''   Instances 6
 
-[G-] Multiple accesses of a mapping/array should use a local variable cache
+The instances below point to the second+ access of a value inside a mapping/array, within a function. Caching a mapping’s value in a local storage or calldata variable when the value is accessed multiple times, saves ~42 gas per access due to not having to recalculate the key’s keccak256 hash (Gkeccak256 - 30 gas) and that calculation’s associated stack operations. Caching an array’s struct avoids recalculating the array offsets into memory/calldata
 
-[G-] Using bools for storage incurs overhead
+```solidity
+FILE: 2023-06-llama/src/strategies/LlamaRelativeQuorum.sol
 
-[G-] Save gas by checking against default WETH address
-
-[G-] Avoid emitting constants
-
-
-
-
-
+219: function getApprovalQuantityAt(address policyholder, uint8 role, uint256 timestamp) external view returns (uint128) {
+220:    if (role != approvalRole && !forceApprovalRole[role]) return 0; ///@audit first call forceApprovalRole[role]
+221:    uint128 quantity = policy.getPastQuantity(policyholder, role, timestamp);
+222:    return quantity > 0 && forceApprovalRole[role] ? type(uint128).max : quantity; ///@audit second call forceApprovalRole[role]
+223:  }
 
 
+240: if (role != disapprovalRole && !forceDisapprovalRole[role]) return 0;
+241:    uint128 quantity = policy.getPastQuantity(policyholder, role, timestamp);
+242:    return quantity > 0 && forceDisapprovalRole[role] ? type(uint128).max : quantity;
+243:  }
+
+```
+https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/strategies/LlamaRelativeQuorum.sol#L219-L224
+
+```solidity
+FILE: Breadcrumbs2023-06-llama/src/LlamaCore.sol
+
+699: nonce = nonces[policyholder][selector];
+700: nonces[policyholder][selector] = LlamaUtils.uncheckedIncrement(nonce);
+
+```
+https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/LlamaCore.sol#LL699C5-L700C75
+
+```solidity
+FILE: 2023-06-llama/src/lib/ERC721NonTransferableMinimalProxy.sol
+
+ require(_ownerOf[id] == address(0), "ALREADY_MINTED");
+
+    // Counter overflow is incredibly unrealistic.
+    unchecked {
+      _balanceOf[to]++;
+    }
+
+    _ownerOf[id] = to;
+
+```
+https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/lib/ERC721NonTransferableMinimalProxy.sol#LL130C4-L137C23
+
+```solidity
+FILE: Breadcrumbs2023-06-llama/src/strategies/LlamaAbsoluteStrategyBase.sol
+
+213: if (role != approvalRole && !forceApprovalRole[role]) return 0;
+214:    uint128 quantity = policy.getPastQuantity(policyholder, role, timestamp);
+215:    return quantity > 0 && forceApprovalRole[role] ? type(uint128).max : quantity;
+
+230: if (role != disapprovalRole && !forceDisapprovalRole[role]) return 0;
+231:    uint128 quantity = policy.getPastQuantity(policyholder, role, timestamp);
+232:    return quantity > 0 && forceDisapprovalRole[role] ? type(uint128).max : quantity;
+
+```
+https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/strategies/LlamaAbsoluteStrategyBase.sol#L213-L215
 
 
 
-[G‑01]	Reduce gas usage by moving to Solidity 0.8.19 or later	2	-
-[G‑02]	Avoid updating storage when the value hasn't changed	1	800
-[G‑03]	Multiple address/ID mappings can be combined into a single mapping of an address/ID to a struct, where appropriate	2	-
-[G‑04]	Structs can be packed into fewer storage slots	2	-
-[G‑05]	Avoid contract existence checks by using low level calls	2	200
-[G‑06]	State variables should be cached in stack variables rather than re-reading them from storage	31	3007
-[G‑07]	<x> += <y> costs more gas than <x> = <x> + <y> for state variables	1	113
-[G‑08]	internal functions only called once can be inlined to save gas	8	160
-[G‑09]	<array>.length should not be looked up in every loop of a for-loop	9	27
-[G‑10]	require()/revert() strings longer than 32 bytes cost extra gas	1	-
-[G‑11]	Optimize names to save gas	12	264
-[G‑12]	Using bools for storage incurs overhead	14	239400
-[G‑13]	Use a more recent version of solidity	2	-
-[G‑14]	++i costs less gas than i++, especially when it's used in for-loops (--i/i-- too)	4	20
-[G‑15]	Usage of uints/ints smaller than 32 bytes (256 bits) incurs overhead	18	-
-[G‑16]	Using private rather than public for constants, saves gas	3	-
-[G‑17]	Division by two should use bit shifting	1	20
-[G‑18]	Empty blocks should be removed or emit something	1	-
-[G‑19]	Use custom errors rather than revert()/require() strings to save gas	13	-
-[G‑20]	Functions guaranteed to revert when called by normal users can be marked payable	47	987
-[G‑21]	Constructors can be marked payable	10	210
-[G‑22]	Not using the named return variables anywhere in the function is confusing	2	-
+
+
+
+
+
+
+
+
+
+
+
+
