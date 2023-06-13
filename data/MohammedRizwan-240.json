@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "MohammedRizwan",
+  "risk": "2",
+  "title": "Use ERC721.saferTransferFrom instead of ERC721.transferFrom when you send out NFT",
+  "issueId": 240,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/240"
+}
