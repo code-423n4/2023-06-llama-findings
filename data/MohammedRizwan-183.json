@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "MohammedRizwan",
+  "risk": "2",
+  "title": "In LlamaCore.executeAction() function, failed transfer with low level call could be overlooked",
+  "issueId": 183,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/183"
+}
