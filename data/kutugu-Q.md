@@ -5,6 +5,7 @@
 | [L-01] | Clones.cloneDeterministic can be frontrun                           | Low      |
 | [L-02] | Malicious guard can break protocol                                  | Low      |
 | [L-03] | Guard may conflict when the action target and selector are same     | Low      |
+| [L-04] | NFT metadata name length has no limit, may destroy NFT display      | Low      |
 
 # Detailed Findings
 
@@ -54,3 +55,17 @@ Guard only distinguishes between target and selector. When actions occur frequen
 ## Recommendations
 
 Use data instead of selector to distinguish
+
+# [L-04] NFT metadata name length has no limit, may destroy NFT display
+
+## Link
+
+- https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/LlamaPolicy.sol#L149
+
+## Description
+
+NFT metadata name length has no limit, may destroy NFT display
+
+## Recommendations
+
+Limit name length
