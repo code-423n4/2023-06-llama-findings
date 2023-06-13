@@ -11,7 +11,7 @@ Recommendation: using ECDSA library from Openzeppelin that would check if the si
 
 https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/cryptography/ECDSA.sol#L141-L158
 
-[I-01] 1. isDisapprovalEnabled in LlamaRelativeQuorem should reduce a bool if possible.
+[I-01] 1. isDisapprovalEnabled&isApprovalEnabled in LlamaRelativeQuorem should return a bool if possible.
 The function name is indicative of a bool return as a a standard practice, and this is most of the case in the rest of the codebase. A simple revert of pass is quite unusual.
 
 ```solidity
@@ -19,9 +19,14 @@ The function name is indicative of a bool return as a a standard practice, and t
     if (minDisapprovalPct > ONE_HUNDRED_IN_BPS) revert DisapprovalDisabled();
     if (role != disapprovalRole && !forceDisapprovalRole[role]) revert InvalidRole(disapprovalRole);
   }
+
+  function isApprovalEnabled(ActionInfo calldata, address, uint8 role) external view {
+    if (role != approvalRole && !forceApprovalRole[role]) revert InvalidRole(approvalRole);
+  }
 ```
 
 https://github.com/code-423n4/2023-06-llama/blob/main/src/strategies/LlamaRelativeQuorum.sol#L229-L232
+https://github.com/code-423n4/2023-06-llama/blob/main/src/strategies/LlamaRelativeQuorum.sol#L215-L217
 
 ## Recommendation 
 Consider returning a bool.
