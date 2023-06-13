@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "QiuhaoLi",
+  "risk": "3",
+  "title": "executeAction doesn't send ethers to executor, leading to revert",
+  "issueId": 176,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/176"
+}
