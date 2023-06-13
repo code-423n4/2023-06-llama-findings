@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "dirk_y",
+  "risk": "3",
+  "title": "Arbitrary delegatecalls from LlamaAccount can be used to steal assets",
+  "issueId": 236,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/236"
+}
