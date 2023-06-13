@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "kutugu",
+  "risk": "3",
+  "title": "authorizedScript can withdraw all the tokens in the LlamaAccount without voting",
+  "issueId": 99,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/99"
+}
