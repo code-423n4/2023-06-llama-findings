@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "0xrugpull_detector",
+  "risk": "3",
+  "title": "Llama Core and Policy implementation not only minimal proxy should not be authorized as scripts",
+  "issueId": 109,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/109"
+}
