@@ -5,7 +5,7 @@
 | NC |  Non-critical | Non risky findings |
 | R  | Refactor | Code changes |
 
-| Total Found Issues | 6 |
+| Total Found Issues | 7 |
 |:--:|:--:|
 
 ### [Low Risk](#low-risk) 
@@ -23,8 +23,10 @@
 |:--:|:-------|:--:|
 | [NC-01] | No function to remove `forceApproval/forceDisapproval` role except by revoking policies| 1 |
 | [NC-02] | Default enum variable is Active instead of Canceled in `ActionState` | 1 |
+| [NC-03] | Confusing comments in contract when assigning `ALL_HOLDERS_ROLE` | 1 |
 
-| Total Non-Critical Issues | 2 |
+
+| Total Non-Critical Issues | 3 |
 |:--:|:--:|
 
 ### [Refactor](#refactor) 
@@ -109,9 +111,45 @@ Currently, the default value for action state is `Active` that may open a possib
 ## Recommendation
 Consider putting `Canceled` as the default action state in `ActionState` struct
 
+## [NC-03] Confusing comments in contract when assigning `ALL_HOLDERS_ROLE`
+
+## Impact
+https://github.com/code-423n4/2023-06-llama/blob/main/src/LlamaPolicy.sol#L479-L485
+
+```solidity
+      else {
+      // There are two ways to reach this branch, both of which are nop-ops:
+      //   1. `hadRole` and `willHaveRole` are both false.
+      //   2. `hadRole` and `willHaveRole` are both true, and `initialQuantity == quantity`.
+      // We allow these no-ops without reverting so you can give someone a policy with only the
+      // `ALL_HOLDERS_ROLE`.
+    }
+```
+In the last else block in `LlamaPolicy._setRoleHolder()` it mentions that protocol owners can give policy holder the `ALL_HOLDERS_ROLE`. However, in the docs in mentions that the way to assign this bootstrap role is to:
+>To grant a policy with the ALL_HOLDERS_ROLE and no other role, call setRoleHolder and pass an arbitrary role ID with a quantity and expiration of 0.
+
+Since the bootstrap `ALL_HOLDERS_ROLE` is hardcoded to have roleId 0, this role can infact never be assigned to any policyholders via `LlamaPolicy._setRoleHolder()` due to the following checks in `LlamaPolicy._assertValidRoleHolderUpdate()`:
+
+https://github.com/code-423n4/2023-06-llama/blob/main/src/LlamaPolicy.sol#L418
+
+```solidity
+    if (role == ALL_HOLDERS_ROLE) revert AllHoldersRole();
+```
+
+## Recommendation
+Though code comments does give a warning regarding `ALL_HOLDERS_ROLE`, consider adding the proper way to assign this role aligned with the docs as mentioned above in both `_setRoleHolder()` and comments below. 
+```solidity
+  /// @notice A special role used to reference all policyholders.
+  /// @dev DO NOT assign policyholders this role directly. Doing so can result in the wrong total supply
+  /// values for this role.
+  uint8 public constant ALL_HOLDERS_ROLE = 0;
+```
+
+
+
 ## Refactor
 
-## [R-01] Refactor `LlamaCore._preCastAssertions()`
+## [R-01] Remove 0 `quantity` check in `LlamaCore._preCastAssertions()`
 
 ## Details
 https://github.com/code-423n4/2023-06-llama/blob/main/src/LlamaCore.sol#L607
@@ -130,6 +168,3 @@ Furthermore, `isApprovalEnabled()/isDisapprovalEnabled()` already checks that ro
 
 ## Recommendation
 Remove the `if (quantity == 0) revert CannotCastWithZeroQuantity(policyholder, role);` check in `_preCastAssertion()`
-
-
-
