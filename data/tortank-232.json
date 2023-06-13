@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "tortank",
+  "risk": "3",
+  "title": "Missing Role Validation in LlamaAbsoluteStrategyBase.sol",
+  "issueId": 232,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/232"
+}
