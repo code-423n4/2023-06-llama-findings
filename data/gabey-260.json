@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "gabey",
+  "risk": "2",
+  "title": "_newCastCount can overflow and lead to wrong state",
+  "issueId": 260,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/260"
+}
