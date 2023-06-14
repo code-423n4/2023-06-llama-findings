@@ -2,23 +2,113 @@
 
 | Issues Count| Issues | Instances|
 |----------|----------|----------|
-| [L-1]  | ``initialize()`` functions could be ``front run``   | 3  |
-| [L-2]  | ``target`` contract is not checked before ``delegatecall`` and ''call''   | 1  |
-| [L-3]  | Gas ``griefing/theft`` is possible on ``unsafe external call``   |  2 |
-| [L-4]  |  Use ``latest version`` of OpenZeppelin instead of ``vulnerable version v4.8.0``  |  - |
-| [L-5]  | Usage of ``tranferFrom`` function is ``discouraged``   | -  |
-| [L-6]  |  ``Token Ownership`` and ``token existence`` is not checked  | -  |
-| [L-7]  | ``abi.encodePacked()`` should not be used with ``dynamic types`` when passing the result to a hash function such as ``keccak256()``   | -  |
-| [L-8]  | The ``ERC1155.sol`` contract does not implement any security features, such as ``access control`` or ``event logging``   | -  |
-| [L-9]  |  Potential risks in ``ERC1155.sol``  | -  |
-| [L-10]  |  A ``single`` point of ``failure``  | -  |
-| [L-11]  |  ``Emit events`` for critical ``initialize()`` functions   | 3  |
-| [L-12]  |  In ``tokenURI()`` function if ``tokenid`` not exists should return ``null`` instead of revert | - |
+| [L-1]  | ``finalizeInitialization()`` function not implemented as per docs   | 1  |
+| [L-2]  | Anyone can deploy the contract and become the ``LLAMA_FACTORY`` owner.   | 1  |
+| [L-3]  | ``sendValue()`` function does not return a status indicating the success or failure of the transfer and Consumes more gas    |  1 |
+| [L-4]  | ``initialize()`` functions could be ``front run``   | 3  |
+| [L-5]  | ``target`` contract is not checked before ``delegatecall`` and ''call''   | 1  |
+| [L-6]  | Gas ``griefing/theft`` is possible on ``unsafe external call``   |  2 |
+| [L-7]  |  Use ``latest version`` of OpenZeppelin instead of ``vulnerable version v4.8.0``  |  - |
+| [L-8]  | Usage of ``tranferFrom`` function is ``discouraged``   | -  |
+| [L-9]  |  ``Token Ownership`` and ``token existence`` is not checked  | -  |
+| [L-10]  | ``abi.encodePacked()`` should not be used with ``dynamic types`` when passing the result to a hash function such as ``keccak256()``   | -  |
+| [L-11]  | The ``ERC1155.sol`` contract does not implement any security features, such as ``access control`` or ``event logging``   | -  |
+| [L-12]  |  Potential risks in ``ERC1155.sol``  | -  |
+| [L-13]  |  A ``single`` point of ``failure``  | -  |
+| [L-14]  |  ``Emit events`` for critical ``initialize()`` functions   | 3  |
+| [L-15]  |  In ``tokenURI()`` function if ``tokenid`` not exists should return ``null`` instead of revert|- |
 
 
 ##
 
-## [L-1] initialize() functions could be front run 
+## [L-1] ``finalizeInitialization()`` function not implemented as per docs
+
+## Impact
+
+```
+177: /// @dev This method can only be called once.
+
+```
+Ensure that the initialization process can only be executed once, preventing any potential misuse or unauthorized modifications of critical contract parameters.
+
+### POC
+
+```solidity
+
+  /// @notice Sets the address of the `LlamaExecutor` contract and gives holders of role ID 1 permission
+  /// to change role permissions.
+  /// @dev This method can only be called once.
+  /// @param _llamaExecutor The address of the `LlamaExecutor` contract.
+  /// @param bootstrapPermissionId The permission ID that allows holders to change role permissions.
+  function finalizeInitialization(address _llamaExecutor, bytes32 bootstrapPermissionId) external {
+    if (llamaExecutor != address(0)) revert AlreadyInitialized();
+
+    llamaExecutor = _llamaExecutor;
+    _setRolePermission(BOOTSTRAP_ROLE, bootstrapPermissionId, true);
+  }
+
+```
+
+### Recommended Mitigation
+
+```solidity
+
++ bool private initialized; // Track initialization status
+
+function finalizeInitialization(address _llamaExecutor, bytes32 bootstrapPermissionId) external {
++   require(!initialized, "Already initialized"); // Check if already initialized
++   initialized = true; // Mark as initialized
+  if (llamaExecutor != address(0)) revert AlreadyInitialized();
+  llamaExecutor = _llamaExecutor;
+  _setRolePermission(BOOTSTRAP_ROLE, bootstrapPermissionId, true);
+}
+
+```
+
+##
+
+## [L-2] Anyone can deploy the contract and become the ``LLAMA_FACTORY`` owner.
+
+### Impact
+
+Anyone can deploy the contract and become the ``LLAMA_FACTORY`` owner.This means that they can mint new LLAMAs, burn LLAMAs, and change the Llama contract's code. This could be used to exploit the contract or to take control of it.
+
+### POC
+
+```solidity
+FILE: 2023-06-llama/src/LlamaPolicyMetadataParamRegistry.sol
+
+59:  LLAMA_FACTORY = msg.sender;
+
+```
+https://github.com/code-423n4/2023-06-llama/blob/9d422c264b57657098c2784aa951852cad32e01c/src/LlamaPolicyMetadataParamRegistry.sol#L59
+
+### Recommended Mitigation
+A better way to assign the value of the LLAMA_FACTORY variable is to use a decentralized governance system. This would allow the community to vote on who should be the LLAMA_FACTORY owner. This would make it more difficult for anyone to exploit the contract or to take control of it
+
+##
+
+## [L-3]  ``sendValue()`` function does not return a status indicating the success or failure of the transfer and Consumes more gas 
+
+### Impact 
+- using sendValue() lies in its limitations in error handling.
+- function has a gas stipend of 2,300 gas units, which may not be sufficient for contracts with complex fallback functions or extensive operations. If the recipient contract consumes more than the stipulated gas limit, the transfer will fail, and the entire transaction will be reverted
+
+
+### POC
+
+```solidity
+FILE: 2023-06-llama/src/accounts/LlamaAccount.sol
+
+149: nativeTokenData.recipient.sendValue(nativeTokenData.amount);
+
+```
+
+### Recommended Mitigation
+Use call() instead of sendValue()
+
+
+## [L-4] initialize() functions could be front run 
 
 ### Impact
 
@@ -55,7 +145,7 @@ Implement access control mechanisms to limit who can call the initialize() funct
 
 ##
 
-## [L-2] ``target`` contract is not checked before ``delegatecall`` and ''call'' 
+## [L-5] ``target`` contract is not checked before ``delegatecall`` and ''call'' 
 
 ### Impact
 - If ``isScript`` is true, then the ``delegatecall`` function is used to invoke the method on the target contract. The ``delegatecall`` function does not check whether the target contract is valid. This means that an attacker could create a ``malicious contract`` that looks like a ``valid contract``, but does not actually have any code. If this malicious contract is invoked using ``delegatecall``, then the attacker could execute arbitrary code on the calling contract.
@@ -74,7 +164,7 @@ This can be done by using the isContract function to check if the target variabl
 
 ##
 
-## [L-3] Gas griefing/theft is possible on unsafe external call
+## [L-6] Gas griefing/theft is possible on unsafe external call
 
 ### Impact
 target.call{value: value}(data) method in Solidity is susceptible to gas griefing attacks
@@ -104,7 +194,7 @@ https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f
 
 ##
 
-## [L-4] Use latest version of OpenZeppelin instead of vulnerable version v4.8.0
+## [L-7] Use latest version of OpenZeppelin instead of vulnerable version v4.8.0
 
 ### Impact
 
@@ -125,7 +215,7 @@ Use at least openzeppelin  4.9.0
 
 ##
 
-## [L-5] Usage of tranferFrom function is discouraged
+## [L-8] Usage of tranferFrom function is discouraged
 
 As per [ERC721 Docs](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721) tranferFrom function is discouraged
 
@@ -153,7 +243,7 @@ When ever possible use safeTransferFrom() function
 
 ##
 
-## [L-6] Token Ownership and token existence is not checked
+## [L-9] Token Ownership and token existence is not checked
 
 ### Impact
 The transferERC721 function does not check to see if the Llama is the owner of the token, or if the token even exists. This could lead to the following problems
@@ -186,7 +276,7 @@ require(erc721Data.token._exists(erc721Data.tokenId), "Token does not exist");
 
 ##
 
-## [L-7] abi.encodePacked() should not be used with dynamic types when passing the result to a hash function such as keccak256()
+## [L-10] abi.encodePacked() should not be used with dynamic types when passing the result to a hash function such as keccak256()
 
 ### Impact 
 
@@ -215,7 +305,7 @@ Consider using abi.encode over abi.encodePacked
 
 ##
 
-## [L-8] The ``ERC1155.sol`` contract does not implement any security features, such as ``access control`` or ``event logging``
+## [L-11] The ``ERC1155.sol`` contract does not implement any security features, such as ``access control`` or ``event logging``
 
 ### Impact 
 This means that anyone can mint tokens, transfer tokens, and burn tokens.
@@ -226,7 +316,7 @@ https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f
 
 ##
 
-## [L-9] Potential risks in ``ERC1155.sol``
+## [L-12] Potential risks in ``ERC1155.sol``
 
 ### Impact
 
@@ -236,7 +326,7 @@ https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f
 
 ##
 
-## [L-10] A single point of failure
+## [L-13] A single point of failure
 
 ### Impact
 The ``onlyLlama`` role has a single point of failure and ``onlyLlama`` can use critical a few functions.
@@ -271,7 +361,7 @@ Also detail them in documentation and NatSpec comments.
 
 ##
 
-## [L-11] Emit events for critical initialize() functions 
+## [L-14] Emit events for critical initialize() functions 
 
 ### Impact
 
@@ -309,7 +399,7 @@ ADD EVENT-EMIT
 
 ##
 
-## [L-12] In ``tokenURI()`` function if ``tokenid`` not exists should return null instead of revert 
+## [L-15] In ``tokenURI()`` function if ``tokenid`` not exists should return null instead of revert 
 
 ### Impact
 
