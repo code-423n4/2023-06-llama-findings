@@ -23,11 +23,38 @@ FILE: 2023-06-llama/src/lib/Checkpoints.sol
 
 - 132: Checkpoint memory last = _unsafeAccess(self, pos - 1);
 + 132: Checkpoint storage last = _unsafeAccess(self, pos - 1);
+```
 
+##
+
+## [G-2] Structs can be packed into fewer storage slots
+
+Each slot saved can avoid an extra Gsset (20000 gas) for the first setting of the struct.
+
+Subsequent reads as well as writes have smaller gas savings
+
+The uint96 type is an unsigned integer that occupies 96 bits (12 bytes) of storage. It can represent values from 0 to 2^96 - 1. 
+
+https://github.com/code-423n4/2023-06-llama/blob/9d422c264b57657098c2784aa951852cad32e01c/src/accounts/LlamaAccount.sol#L34-L37
+
+### Saves 1 SLOT and 2000 gas 
+
+```diff
+FILE: 023-06-llama/src/accounts/LlamaAccount.sol
+
+61: struct ERC1155Data {
+62:    IERC1155 token; // The ERC1155 token to transfer.
+63:    address recipient; // The address to transfer the token to.
+- 64:    uint256 tokenId; // The tokenId of the token to transfer. 
++ 64:    uint96 tokenId; // The tokenId of the token to transfer. 
+65:    uint256 amount; // The amount of tokens to transfer.
+66:    bytes data; // The data to pass to the ERC1155 token.
+67:  }
 
 ```
 ##
-## [G-2] Multiple accesses of a mapping/array should use a local variable cache
+
+## [G-3] Multiple accesses of a mapping/array should use a local variable cache
 
 ### Saves ``480 GAS''   Instances 6
 
@@ -88,6 +115,79 @@ FILE: Breadcrumbs2023-06-llama/src/strategies/LlamaAbsoluteStrategyBase.sol
 
 ```
 https://github.com/code-423n4/2023-06-llama/blob/aac904d31639c1b4b4e97f1c76b9c0f40b8e5cee/src/strategies/LlamaAbsoluteStrategyBase.sol#L213-L215
+
+##
+
+## [G-4]  IF’s/require() statements that check input arguments should be at the top of the function
+
+Checks that involve constants should come before checks that involve state variables, function calls, and calculations. By doing these checks first, the function is able to revert before wasting a Gcoldsload (2100 gas) in a function that may ultimately revert in the unhappy case.
+
+https://github.com/code-423n4/2023-06-llama/blob/9d422c264b57657098c2784aa951852cad32e01c/src/LlamaCore.sol#L323
+
+### Cheaper to check the function parameter before making an state variable check. ``action.minExecutionTime`` involving the state variable . Should be checked last 
+
+```diff
+FILE: 2023-06-llama/src/LlamaCore.sol
+
+322: if (currentState != ActionState.Queued) revert InvalidActionState(currentState);
+- 323: if (block.timestamp < action.minExecutionTime) revert MinExecutionTimeNotReached();
+324: if (msg.value != actionInfo.value) revert IncorrectMsgValue();
++ 323: if (block.timestamp < action.minExecutionTime) revert MinExecutionTimeNotReached();
+
+```
+https://github.com/code-423n4/2023-06-llama/blob/9d422c264b57657098c2784aa951852cad32e01c/src/strategies/LlamaRelativeQuorum.sol#L165
+
+### Condition check should be top of the initialize() to avoid unwanted state variables write 
+
+```diff
+FILE: Breadcrumbs2023-06-llama/src/strategies/LlamaRelativeQuorum.sol
+
+157: Config memory strategyConfig = abi.decode(config, (Config));
++ 165:    if (strategyConfig.minApprovalPct > ONE_HUNDRED_IN_BPS) revert InvalidMinApprovalPct(minApprovalPct);
+    minApprovalPct = strategyConfig.minApprovalPct;
+158:    llamaCore = LlamaCore(msg.sender);
+159:    policy = llamaCore.policy();
+160:    queuingPeriod = strategyConfig.queuingPeriod;
+161:    expirationPeriod = strategyConfig.expirationPeriod;
+162:    isFixedLengthApprovalPeriod = strategyConfig.isFixedLengthApprovalPeriod;
+163:    approvalPeriod = strategyConfig.approvalPeriod;
+164:
+- 165:    if (strategyConfig.minApprovalPct > ONE_HUNDRED_IN_BPS) revert InvalidMinApprovalPct(minApprovalPct);
+    minApprovalPct = strategyConfig.minApprovalPct;
+
+```
+
+##
+
+## [G-5] Repeated condition checks should be refactored to modifiers
+
+repeated condition checks should be refactored to modifiers.
+
+https://github.com/code-423n4/2023-06-llama/blob/9d422c264b57657098c2784aa951852cad32e01c/src/strategies/LlamaRelativeQuorum.sol#L179
+
+
+### 
+
+```solidity
+FILE: 2023-06-llama/src/strategies/LlamaRelativeQuorum.sol
+
+179:  if (role == 0) revert InvalidRole(0);
+187:  if (role == 0) revert InvalidRole(0);
+
+216:  if (role != approvalRole && !forceApprovalRole[role]) revert InvalidRole(approvalRole);
+221:  if (role != approvalRole && !forceApprovalRole[role]) return 0;
+
+231: if (role != disapprovalRole && !forceDisapprovalRole[role]) revert InvalidRole(disapprovalRole);
+240: if (role != disapprovalRole && !forceDisapprovalRole[role]) return 0;
+
+```
+
+
+
+
+ 
+
+
 
 
 
