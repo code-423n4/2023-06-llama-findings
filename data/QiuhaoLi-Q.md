@@ -1,4 +1,4 @@
-## [low] _deployStrategies() can't handle two strategies with the same config
+## [non-critical] _deployStrategies() can't handle two strategies with the same config
 
 https://github.com/code-423n4/2023-06-llama/blob/main/src/LlamaCore.sol#L638
 
@@ -19,7 +19,7 @@ So when policyholders want to deploy a strategy with the same config, or there e
 
 Adding random salt can solve this problem.
 
-## [low] _deployAccounts() can't handle two accounts with the same config
+## [non-critical] _deployAccounts() can't handle two accounts with the same config
 
 https://github.com/code-423n4/2023-06-llama/blob/main/src/LlamaCore.sol#L658
 
