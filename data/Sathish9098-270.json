@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Sathish9098",
+  "risk": "2",
+  "title": "Comparing Ether values using equality operators (== or !=) can be risky due to potential rounding errors.",
+  "issueId": 270,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/270"
+}
