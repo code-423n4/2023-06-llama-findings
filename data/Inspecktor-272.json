@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Inspecktor",
+  "risk": "2",
+  "title": "Clone LlamaCore and LlamaPolicy in LlamaFactory.sol may fail or DOS",
+  "issueId": 272,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/272"
+}
