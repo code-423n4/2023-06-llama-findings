@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Sathish9098",
+  "risk": "2",
+  "title": "No control for finalizeInitialization() the over all contract become risk. Attacker can become ``llamaExecutor``. This can be a potential security risk if anyone can grant permissions to others maliciously",
+  "issueId": 264,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/264"
+}
