@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "seerether",
+  "risk": "3",
+  "title": "Uses Send Value to transfer Native token instead of Transfer Function",
+  "issueId": 304,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/304"
+}
