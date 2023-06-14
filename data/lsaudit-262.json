@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "lsaudit",
+  "risk": "2",
+  "title": "[M-03] Gas griefing/thief in LlamaAccount execute()",
+  "issueId": 262,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/262"
+}
