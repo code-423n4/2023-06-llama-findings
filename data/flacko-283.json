@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "flacko",
+  "risk": "2",
+  "title": "LlamaExecutor#execute is not payable",
+  "issueId": 283,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/283"
+}
