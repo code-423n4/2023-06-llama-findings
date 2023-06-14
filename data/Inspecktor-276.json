@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Inspecktor",
+  "risk": "2",
+  "title": "The low-level call returns true if the address does not exist",
+  "issueId": 276,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/276"
+}
