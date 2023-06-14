@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "joestakey",
+  "risk": "2",
+  "title": "Execution does not work if the action has a non-zero value",
+  "issueId": 255,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/255"
+}
