@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "jaraxxus",
+  "risk": "2",
+  "title": "Success value and msg.value not checked in llamaExecutor.sol",
+  "issueId": 265,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/265"
+}
