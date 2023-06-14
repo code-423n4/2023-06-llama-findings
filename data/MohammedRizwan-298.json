@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "MohammedRizwan",
+  "risk": "2",
+  "title": "In LlamaAccount.transferERC20(), Transaction revert if the Token does not support 0 value transfer",
+  "issueId": 298,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/298"
+}
