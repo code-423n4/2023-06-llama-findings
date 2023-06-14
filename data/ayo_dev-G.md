@@ -56,3 +56,44 @@ instead of
   }
 }
 ```
+3.In Library/Checkpoints the computations in _lowerbinaryLookup and _upperBinaryLookup should be uncheked since they have no possibility of overflowing since we already find the the average, which makes overflow impossible, this saves you 600+ in gas 
+link to example:https://github.com/code-423n4/2023-06-llama/blob/9d422c264b57657098c2784aa951852cad32e01c/src/lib/Checkpoints.sol#L183
+```
+    function _lowerBinaryLookup(
+        Checkpoint[] storage self,
+        uint64 timestamp,
+        uint256 low,
+        uint256 high
+    ) private view returns (uint256) {
+        while (low < high) {
+            uint256 mid = average(low, high);
+            if (_unsafeAccess(self, mid).timestamp < timestamp) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return high;
+    }
+
+this should be used
+ 
+    function _lowerBinaryLookup(
+        Checkpoint[] storage self,
+        uint64 timestamp,
+        uint256 low,
+        uint256 high
+    ) private view returns (uint256) {
+     unchecked{
+        while (low < high) {
+            uint256 mid = average(low, high);
+            if (_unsafeAccess(self, mid).timestamp < timestamp) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return high;
+    }
+
+```
