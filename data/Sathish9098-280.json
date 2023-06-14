@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Sathish9098",
+  "risk": "2",
+  "title": "Manually assigning token IDs in ERC-721 can cause problems in the future",
+  "issueId": 280,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/280"
+}
