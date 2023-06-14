@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Co0nan",
+  "risk": "3",
+  "title": "executeAction doesn't check if `isScript` is true causing user ETH to be stacked forever.",
+  "issueId": 256,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/256"
+}
