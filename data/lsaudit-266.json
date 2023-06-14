@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "lsaudit",
+  "risk": "2",
+  "title": "Actions can stuck in Queued state",
+  "issueId": 266,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/266"
+}
