@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "joestakey",
+  "risk": "2",
+  "title": "Executing a script action with non-zero value results in frozen funds",
+  "issueId": 252,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/252"
+}
