@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "Inspecktor",
+  "risk": "2",
+  "title": "Clone LlamaAccount with the same accountConfigs will result in an error, blocking the _deployAccounts() function or DOS",
+  "issueId": 274,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/274"
+}
