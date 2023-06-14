@@ -1,0 +1,8 @@
+{
+  "contest": 246,
+  "handle": "qpzm",
+  "risk": "3",
+  "title": "Functions modified by `LlamaAccount.onlyLlama` can be called by contracts other than `LlamaCore`.",
+  "issueId": 244,
+  "issueUrl": "https://github.com/code-423n4/2023-06-llama-findings/issues/244"
+}
