@@ -974,7 +974,7 @@ Large code bases, or code with lots of inline-assembly, complicated math, or com
 Various in-scope contract files.
 
 
-## <[N-03] Initial value check is missing in Set Functions
+## [N-03] Initial value check is missing in Set Functions
 
 A check regarding whether the current value and the new value are the same should be added.
 
